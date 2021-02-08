@@ -1,0 +1,200 @@
+$body-background: #1e374f;
+$trail-color: #41a9f3;
+$circle-border: #305271;
+$white: #fff;
+$circle-width: 600px;
+$circle-height: 600px;
+$circle-top: 50px;
+// reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  font-size: 100%;
+  letter-spacing: 1.6px;
+  font-family: 'M PLUS Rounded 1c';
+  border-radius: 10px;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+body {
+  background-color: $body-background;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  widows: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+a {
+  text-decoration: none;
+}
+
+//   .ly_top {
+//     background-image: url("/snow.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat:  no-repeat;
+//     width: 100%;
+//     height: 100vh;
+//     color: #333;
+//     opacity: .8;
+//     .ly_topInner {
+//       max-width: 1170px;
+//       margin: 0 auto;
+//       height: 100%;
+//       display: table;
+//       &_contents {
+//         display: table-cell;
+//         vertical-align: middle;
+//         text-align: center;
+//         h1 {
+//           font-size: 4em;
+//           margin-bottom: .5em;
+//         }
+//       }
+//     }
+//   }
+
+//   .bl_weeks {
+//     &_title {
+//       font-size: 3em;
+//     }
+//     &_list {
+//       display: flex;
+//       justify-content: center;
+//       font-size: 5em;
+//       &_item {
+//         letter-spacing: 1em;
+//         cursor: pointer;
+//       }
+//     }
+//   }
+
+//   /* 背景 #1E374F */
+//   /* タイマーの枠線 #305271 */
+//   /* 残っているタイマーの枠線&時間表示&stopボタン #44A8F4 */
+
+// timer
+.container {
+  margin: 20px auto;
+  max-width: calc(100% - 40px);
+  background: $circle-border;
+  padding: 15px;
+  text-align: center;
+  color: $trail-color;
+  width: 1000px;
+}
+
+#timer {
+  background: $body-background;
+  height: 140px;
+  // line-height: 120px;
+  font-size: 40px;
+  margin-bottom: 15px;
+  .timerTitle {
+    padding: 0 10px 10px 10px;
+    > input {
+      width: 100%;
+      border: 5px solid $circle-border;
+      background: $body-background;
+      color: $trail-color;
+      outline: none;
+      padding: 0 5px;
+    }
+  }
+}
+
+.controls {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #41a9f3;
+  padding: 10px 0px;
+  > div {
+    padding: 15px;
+    background-color: $body-background;
+  }
+}
+
+.timerListWrap {
+  .timerList {
+    font-size: 1.5em;
+    li {
+      padding-top: 10px;
+    }
+  }
+}
+
+// timer_mask
+.timerMask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  color: $trail-color;
+  background-color: $body-background;
+
+  &_controls {
+    font-size: 2.5em;
+    display: flex;
+    justify-content: space-around;
+    p {
+      font-size: 30px;
+    }
+    button {
+      color: inherit;
+      background-color: inherit;
+      cursor: pointer;
+    }
+  }
+  &_item {
+    position: relative;
+    .time_wrap {
+      position: absolute;
+      font-size: 5em;
+      left: 50%;
+      transform: translateX(-50%);
+      top: calc(#{$circle-top} + (#{$circle-height} / 2) - 80px);
+    }
+  }
+}
+
+.childTimer_controls {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #41a9f3;
+  padding: 10px 0px;
+  > p {
+    font-weight: bold;
+  }
+  > div {
+    padding: 15px;
+    background-color: #1e374f;
+  }
+}
+//circle
+.radial-progress-container {
+  margin: 0 auto;
+  position: absolute;
+  height: $circle-height;
+  width: $circle-width;
+  top: $circle-top;
+  left: 50%;
+  transform: translateX(-50%);
+}
