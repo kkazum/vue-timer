@@ -1,24 +1,11 @@
-# timer
+## vue-timer
+vue3の練習用に作成した、複数のタイマーを同時にセットできるアプリ
 
-## Project setup
-```
-yarn install
-```
+## 起動方法と使用方法
+1. プロジェクトのルートディレクトリで`yarn serve`
+2. ローカルサーバーの`http://localhost:9050/`にアクセス
+3. タイマーの削除機能は未実装であるため検証ツールのlocalstorageから削除する必要あり
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## License
+MIT
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

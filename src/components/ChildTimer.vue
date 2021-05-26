@@ -1,34 +1,42 @@
 <template>
   <li :class="timerItem">
-    <span id="minuteOrigin">{{ timer.minutes }}</span>
+    <span id="minuteOrigin">{{ newProps.minutes }}</span>
     <span id="middleOrigin">:</span>
-    <span id="secondsOrigin">{{ timer.seconds }}</span>
+    <span id="secondsOrigin">{{ newProps.seconds }}</span>
     <div class="childTimer_controls">
-      <p>{{ timer.title }}</p>
-      <div @click="startTimer(timer)" v-if="!timer.timerId" id="start">
+      <p>{{ newProps.title }}</p>
+      <div @click="startTimer(newProps)" v-if="!newProps.timerId" id="start">
         Start
       </div>
-      <div v-if="timer.isMaskShown" class="timerMask">
+      <div v-if="newProps.isMaskShown" class="timerMask">
         <div class="timerMask_inner">
           <div class="timerMask_item">
             <div class="time_wrap">
-              <span id="minuteOrigin">{{ timer.minutes }}</span>
+              <span id="minuteOrigin">{{ newProps.minutes }}</span>
               <span id="middleOrigin">:</span>
-              <span id="secondsOrigin">{{ timer.seconds }}</span>
+              <span id="secondsOrigin">{{ newProps.seconds }}</span>
             </div>
-            <RadialProgressBar :totalTime="timer.totalTime" />
+            <RadialProgressBar :totalTime="newProps.totalTime" />
           </div>
           <div class="timerMask_controls">
-            <button @click="startTimer(timer)" v-if="!timer.timerId" id="start">
+            <button
+              @click="startTimer(newProps)"
+              v-if="!newProps.timerId"
+              id="start"
+            >
               Start
             </button>
-            <button @click="stopTimer(timer)" v-if="timer.timerId" id="stop">
+            <button
+              @click="stopTimer(newProps)"
+              v-if="newProps.timerId"
+              id="stop"
+            >
               Stop
             </button>
-            <p>{{ timer.title }}</p>
+            <p>{{ newProps.title }}</p>
             <button
-              @click="resetChildTimer(timer)"
-              v-if="timer.resetButton"
+              @click="resetChildTimer(newProps)"
+              v-if="newProps.resetButton"
               id="reset"
             >
               Reset
@@ -42,10 +50,9 @@
 
 <script lang="ts">
 /* eslint-disable */
-import { defineComponent, PropType, reactive } from "vue";
+import { defineComponent, PropType, reactive, toRefs, computed } from "vue";
 import RadialProgressBar from "./CircleProgress.vue";
-import { ChildTimer } from '../types/utils'
-
+import { ChildTimer } from "../types/utils";
 
 export default defineComponent({
   props: {
@@ -58,13 +65,22 @@ export default defineComponent({
     RadialProgressBar,
   },
   setup(props) {
-    const { timer } = props;
-
+    const newProps: ChildTimer = reactive({
+      ...props.timer!,
+      minutes: computed(() => {
+        const minutes = Math.floor(newProps.totalTime! / 60);
+        return minutes;
+      }),
+      seconds: computed(() => {
+        const seconds = newProps.totalTime! - newProps.minutes * 60;
+        return String(seconds).padStart(2, "0");
+      }),
+    });
     const ChildTimer = reactive({
-      timer,
+      newProps,
     });
     const startTimer = (timer: ChildTimer) => {
-      timer.timerId = setInterval(() => countDown(timer), 1000);
+      timer.timerId = window.setInterval(() => countDown(timer), 1000);
       timer.resetButton = true;
       timer.isMaskShown = true;
     };
@@ -89,7 +105,6 @@ export default defineComponent({
       } else {
         timer.totalTime = 0;
         resetChildTimer(timer);
-        // Swe("Complete!!", "", "success");
       }
     };
 

@@ -16,12 +16,11 @@
     </div>
     <div class="timerListWrap">
       <ul class="timerList">
-        <draggable :list="timerState" item-key="id" @end="saveItem(timerArr)">
+        <draggable :list="timerState" item-key="id" @end="saveItem(timerState)">
           <template #item="{ element, index }">
             <ChildTimer :timer="element" :key="index" />
           </template>
         </draggable>
-        <!-- <ChildTimer v-for="(timer, i) in timerArr" :key="i" :timer="timer" /> -->
       </ul>
     </div>
   </div>
