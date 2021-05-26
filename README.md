@@ -9,3 +9,4 @@ vue3の練習用に作成した、複数のタイマーを同時にセットで�
 ## License
 MIT
 
+![timer](https://user-images.githubusercontent.com/49956319/119615977-061f6200-be3b-11eb-86da-25b75af932bf.gif)
